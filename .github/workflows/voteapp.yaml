@@ -26,22 +26,24 @@ jobs:
       with:
         path: |
           ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('vote/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
+        cd vote
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Run unit tests
       run: |
         # Add your command to run tests here
+        cd vote
         pytest
 
     - name: Build Docker image
-      run: docker build -t voteapp:${{ github.sha }} .\
+      run: docker build -t voteapp:${{ github.sha }} vote/.
     
     - name: Install Trivy
       run: |
@@ -89,7 +91,7 @@ jobs:
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@master
       with:
-        projectBaseDir: .
+        projectBaseDir: vote
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 

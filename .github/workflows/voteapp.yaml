@@ -69,12 +69,22 @@ jobs:
       if: success()
       run: docker push voteapp:${{ github.sha }}
 
-    - name: OWASP Dependency Check
-      uses: jeremylong/DependencyCheck_Action@v2
+    - name: Depcheck
+      uses: dependency-check/Dependency-Check_Action@main
+      id: Depcheck
       with:
-        project: "VoteApp"
-        format: "HTML"
-        failBuildOnCVSS: 5
+        project: 'test'
+        path: '.'
+        format: 'HTML'
+        out: 'reports' # this is the default, no need to specify unless you wish to override it
+        args: >
+          --failOnCVSS 7
+          --enableRetired
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+         name: Depcheck report
+         path: ${{github.workspace}}/reports
 
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@master

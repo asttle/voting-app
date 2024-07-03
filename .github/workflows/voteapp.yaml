@@ -67,9 +67,11 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+    - name: Tag Docker image
+      run: docker tag voteapp:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/voteapp:${{ github.sha }}
+  
     - name: Push Docker image to DockerHub
-      if: success()
-      run: docker push voteapp:${{ github.sha }}
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/voteapp:${{ github.sha }}
 
     - name: Depcheck
       uses: dependency-check/Dependency-Check_Action@main

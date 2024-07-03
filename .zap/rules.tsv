@@ -1,0 +1,7 @@
+# The rules.tsv file for ZAP
+# Format: <AlertID> <Action> <Alert Name>
+# Example:
+10010 IGNORE Cookie set without HttpOnly flag
+10020 IGNORE X-Content-Type-Options header missing
+10021 WARN Content Security Policy (CSP) not implemented
+10022 FAIL X-Frame-Options header not set

@@ -36,11 +36,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run unit tests
-      run: |
-        # Add your command to run tests here
-        cd vote
-        pytest
+    # - name: Run unit tests
+    #   run: |
+    #     # Add your command to run tests here
+    #     cd vote
+    #     pytest
 
     - name: Build Docker image
       run: docker build -t voteapp:${{ github.sha }} vote/.

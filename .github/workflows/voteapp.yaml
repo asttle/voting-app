@@ -96,6 +96,7 @@ jobs:
         projectBaseDir: vote
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
     - name: SAST Scan
       uses: ShiftLeftSecurity/scan-action@master

@@ -105,8 +105,9 @@ jobs:
         failBuild: true
 
     - name: DAST Scan
-      uses: zaproxy/action-baseline@v0.4.0
+      uses: zaproxy/action-full-scan@v0.4.0
       with:
+        docker_name: 'owasp/zap2docker-stable'
         token: ${{ secrets.GITHUB_TOKEN }}
         target: 'https://workhall.dev'
         rulesFile: '.zap/rules.tsv'
@@ -115,4 +116,5 @@ jobs:
     - name: Publish DAST Scan Report
       uses: actions/upload-artifact@v2
       with:
-        name: zap-report
+        name: zap-report.html
+        path: zap-report.html

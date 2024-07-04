@@ -107,6 +107,12 @@ jobs:
     - name: DAST Scan
       uses: zaproxy/action-baseline@v0.4.0
       with:
-        target: 'http://your_live_app_url_here'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        target: 'https://workhall.dev'
         rulesFile: '.zap/rules.tsv'
         cmdOptions: '-J report.json'
+
+    - name: Publish DAST Scan Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: zap-report

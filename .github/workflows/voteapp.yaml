@@ -112,6 +112,7 @@ jobs:
         target: 'https://workhall.dev'
         rulesFile: '.zap/rules.tsv'
         cmdOptions: '-J report.json'
+        allow_issue_writing: false
 
     - name: Publish DAST Scan Report
       uses: actions/upload-artifact@v2
